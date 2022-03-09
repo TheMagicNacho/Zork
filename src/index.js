@@ -60,6 +60,7 @@ function zork(cmdArray){
     // Create a game object
     let GameObject = new CLI(rooms, items); 
 
+
     /// ACT
     // loop through cmd inputs
     

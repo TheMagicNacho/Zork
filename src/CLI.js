@@ -85,7 +85,7 @@ export default class CLI {
     {
         // INIT
         this.init();
-        this.linkAllRooms();
+        
 
         // Get command input
        // let cmd = this.inputElement.val();
@@ -150,7 +150,7 @@ export default class CLI {
     output(output)
     {
         //this.outputElement.before(output+"<br><br>");
-        this.outputElement = output; 
+        this.outputElement += output; 
     }
     //////////////////////////////////////GAME ENGINE METHODS
     init () {
@@ -158,12 +158,13 @@ export default class CLI {
         // this.cli.startCommandListener();
         this.initalizePlayer();
         this.lookAction();
+        this.linkAllRooms();
     }
 
     initalizePlayer () {
         this.player = new Player();
         this.player = this.player.loadPlayerState();
-        console.log('from INIT PLAYER'+ this.player.currentRoom);
+    
        
 
         // This just provides feed back on if the file was loaded from save.
@@ -288,7 +289,7 @@ export default class CLI {
 
     goAction (direction) {
 
-        console.log('FROM GO ACTION'+ this.player.currentRoom);
+        /// CALLING THIS FUNCTION DESTROYS THE PLAYER OBJECT
         const currentRoom = this.player.currentRoom;                                                                                                         
         let lDirection = direction.toLowerCase();
 
@@ -465,8 +466,7 @@ export default class CLI {
      * @param {string} cmd The command
      * @param {string|null} arg The command arguments ( if any )
      */
-    executeCommand(cmd, arg = null)
-    {
+    executeCommand(cmd, arg = null) {
 
         var verbMap = {
             "GO":         this.goAction,
@@ -501,7 +501,7 @@ export default class CLI {
         if ( ["NORTH", "SOUTH", "EAST", "WEST", "BACK", "CLIMB", "ENTER", "UP", "DOWN"].includes(cmd) ) {
             verbMap[ cmd ]( cmd );
         } else {
-            verbMap[ cmd ]( arg );
+            verbMap[ cmd ];
         }
 
     }
