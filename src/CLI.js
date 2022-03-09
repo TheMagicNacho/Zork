@@ -55,12 +55,13 @@ export default class CLI {
      * @param {element} outputElement The output element
      * @param {element} cliContainer The cli containing element
      */
+
     //deleted CLI container
     constructor() {
         this.player = null;
 
-        this.inputElement  = '';
-        this.outputElement = '';
+        // this.inputElement  = '';
+        // this.outputElement = '';
         // this.cliContainer  = cliContainer;
         this.itemObjects = items;
 
@@ -120,17 +121,22 @@ export default class CLI {
     /**
      * Receive, parse and return valid commands
      * 
-     * @returns {array}
+     *  ENTRY POINT FOR PLAYER OBJECT 
      */
-    submitCommand(input, playerObject) 
+    submitCommand(cmd, playerObject) 
     {
         // INIT
-        this.init(playerObject);
-        
+        // console.log(playerObject.player_object);
+        playerObject = playerObject["player_object"]
+        playerObject = JSON.parse(playerObject);
 
-        // Get command input
-       // let cmd = this.inputElement.val();
-        let cmd = input;
+        console.log(playerObject);
+        this.init(playerObject);
+
+        // Turns string into array. Workaround required by postgres and knex.
+        const inventoryString = playerObject.inventory;
+        const inventoryArray = inventoryString ? inventoryString.split(',') : [];
+        playerObject.inventory = inventoryArray;
         
         // Drop command to lower case
         // This function is easier to implement and still runs in O(n)
@@ -142,31 +148,21 @@ export default class CLI {
         for ( let i = 0; i < cmd.length; i++ ) {
             if ( !this.validateCommand(cmd[i]) ) {
                 this.invalidCommand();
-            
                 return;
             }
         }
-
-
         let executableCommand = cmd[0];
         let commandArgument   = (cmd[1]) ? cmd[1] : null;
         this.executeCommand(executableCommand, commandArgument);
     }
     
 
-    /**
-     * Validate that the parameter CMD is within the
-     * allowed verbs array.
-     * 
-     * @param {string} cmd The input command
-     * @returns {bool}
-     */
+
     validateCommand(cmd) 
     {
        
         if ( this.allowedVerbs.includes(cmd) || 
-                // localArray.includes(cmd.toLowerCase()) ||
-                this.openableInstances.includes(cmd)
+             this.openableInstances.includes(cmd)
             ) 
         {
             return true;
@@ -189,7 +185,8 @@ export default class CLI {
      */
 
     output(output)
-    {
+    {   
+
         //this.outputElement.before(output+"<br><br>");
         // this.outputElement += output; 
         this.player.output = '';
@@ -218,8 +215,18 @@ export default class CLI {
         this.player.resetPlayerState();
         this.output(this.outputList.gameReset);
     };
-
+    // This is the exit method.
+    // Use in index to return the player's game piece.
     dumpPlayerObject(){
+        // THIS SECTION TURNS THE INVENTORY INTO A STRING OTHERWISE POSTGRES AND KNEX WILL GET ANGRY
+        // grab current inventory array
+        const inventoryArray = this.player.inventory;
+        // stringify array
+        const inventoryString = inventoryArray.toString();
+        // send string to inventory
+        this.player.inventory = inventoryString;
+
+
         return this.player;
     }
 
@@ -273,7 +280,8 @@ export default class CLI {
 
         const currentRoom = this.player.currentRoom;
     
-
+        // console.log('current room 281', currentRoom);
+        // console.log('this.player 282', this.player);
         if( !this.roomList[currentRoom].roomIsDark ) {
 
 			this.output( this.roomList[currentRoom].name );
@@ -340,7 +348,7 @@ export default class CLI {
             this.player.setPreviousLocation(roomList[currentRoom].varName);
             currentRoom = this.player.currentRoom;
         } else {
-
+                console.log(this.roomList[currentRoom]);
             if (this.roomList[currentRoom][lDirection] === undefined) 
             {
                 this.output(this.outputList.invalidDirection);

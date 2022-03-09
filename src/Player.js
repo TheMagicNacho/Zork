@@ -109,6 +109,7 @@ export default class Player {
         // TODO: Check to see if user has SQL data saved
         if(true) 
         {
+            console.log('init player with: ' + playerObject);
             let savedGame       = playerObject;
             this.inventory      = savedGame.inventory;
             this.moves          = savedGame.moves;
