@@ -500,14 +500,8 @@ export default class CLI {
 
     }
 
-
-
-
-
-    executeCommand(){
+    executeCommand(cmd, arg){
         this.player.moves += 1;
-        const cmd = "GO";
-        const arg = "NORTH";
 
         //TODO: handle singel input commands
 
