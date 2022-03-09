@@ -1,19 +1,11 @@
 /**
- * Player Data Model
+ * Player data stores all information on player and serves as the object saved for persistance.
  */
 export default class Player {
-    /**
-     * The Constructor
-     *  
-     * @param {array}    inventory Player inventory
-     * @param {integer}  moves     Player move counter
-     * @param {intenger} score Player score
-     * @param {object}   currentRoom Current room object
-     * @param {object}   previousRoom Previous room object
-     * @param {bool}     gameIsSaved Whether game has been saved  
-     * @param {bool}     verbose Whether verbose mode is active 
-     */
-    constructor(inventory = [], 
+    constructor(
+
+                output = '',
+                inventory = [], 
                 moves = 0, 
                 score = 0, 
                 currentRoom = "westOfHouse", 
@@ -22,6 +14,7 @@ export default class Player {
                 verbose = false
                 )
     {
+        this.output              = output;
         this.inventory           = inventory;
         this.score               = score;
         this.moves               = moves;
@@ -91,10 +84,10 @@ export default class Player {
         this.verbose = verbose;
     }
 
-    addMove()
-    {
-        this.moves = this.moves++;
-    }
+    // addMove()
+    // {
+    //     this.moves = this.moves++;
+    // }
 
     addScore(score)
     {
@@ -111,12 +104,12 @@ export default class Player {
         this.inventory = this.inventory.filter(e => e !== item);
     }
 
-    loadPlayerState()
+    loadPlayerState(playerObject)
     {
         // TODO: Check to see if user has SQL data saved
-        if(false) 
+        if(true) 
         {
-            let savedGame       = JSON.parse(localStorage.getItem('zorkSaveGameState'));
+            let savedGame       = playerObject;
             this.inventory      = savedGame.inventory;
             this.moves          = savedGame.moves;
             this.score          = savedGame.score;
