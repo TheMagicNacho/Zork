@@ -31,7 +31,7 @@ function zork (cmd, playerObject){
 const testArray = ['', "go north"];
 // const playerObject = {"output":"You are facing the north side of a white house. There is no door here,<br /> and all the windows are boarded up. To the north a narrow path winds through the trees.","inventory":[],"score":0,"moves":2,"currentRoom":"northOfHouse","previousRoom":"westOfHouse","gameIsSaved":false,"verbose":false}
 const playerObject = {"output":"This is a path winding through a dimly lit forest. The path heads north-south here.<br /> One particulary large tree with some low branches stands at the edge of the path.","inventory":[],"score":0,"moves":3,"currentRoom":"forestPath","previousRoom":"northOfHouse","gameIsSaved":false,"verbose":false}
-const cmd = 'climb tree';
+const cmd = 'go north';
 console.log(zork(cmd, playerObject));
 
 
