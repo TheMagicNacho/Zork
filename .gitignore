@@ -1,3 +1,8 @@
 # Do'nt track these
 .vscode
 zork.png
+# ignore packages
+/node_modules
+
+#ignore environment variables
+.env

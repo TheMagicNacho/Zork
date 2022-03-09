@@ -1,6 +1,9 @@
 /**
  * CLI Service Class
- */
+ */ 
+
+// function that takes in user param, pass to game engine, returns correct response
+// need end points
 class CLI
 {
     /**
@@ -41,6 +44,9 @@ class CLI
         });
     }
 
+    //update table command
+    //when user enters a command, it needs to update game state
+    
     /**
      * Receive, parse and return valid commands
      * 
@@ -106,7 +112,8 @@ class CLI
      */
     output(output)
     {
-        this.outputElement.before(output+"<br><br>");
+        // this.outputElement.before(output);
+        return output;
     }
 
     /**
