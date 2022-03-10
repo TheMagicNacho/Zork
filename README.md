@@ -28,7 +28,6 @@ The following instructions are for those who want to develop ZaaS on a local ser
 - The game engine is held in the src directory.
     - the entry point into the game is index.js
     - the Game Engine begins in CLI.js
-    - 
 
 ## 💿 How to install repo
 Fork this repo, then clone it onto your machine.
