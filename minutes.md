@@ -84,3 +84,23 @@ COA
 - Where do you need help
     - JP: DB
     - JJ: API Endpoints
+
+# Stand-down 20220309
+- What have we done
+    - way too much
+    - MVP achieved
+- What's next
+    - work on read me
+    - Debug gameplay
+- Where do we need help
+    - focus on Readme
+
+# Standup 20220310
+- What have we done?
+    - Achieved MVP
+- What is next?
+    - Bring server online
+    - Read Me
+    - Low priority - Debug
+- Where do we need help?
+    - Life in general.

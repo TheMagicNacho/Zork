@@ -1,4 +1,4 @@
-# Do'nt track these
+# Don't track these
 .vscode
 zork.png
 # ignore packages

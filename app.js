@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import knex from 'knex';
 import zork from './src/index.js';
+import morgan from 'morgan';
 
 // this reffrences the kenex file we created.
 // TODO: make this based on environment variables in the future.
@@ -21,6 +22,7 @@ import { development } from './knexfile.js';
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(morgan('tiny'));
 
 // instanciate a new knex object with the connection requirements attached.
 const localKnex = knex(development);
@@ -28,7 +30,7 @@ const localKnex = knex(development);
 
 ///////// ACTUAL ROUTING //////////
 app.get('/', (req, res) => {
-    res.send('Welcome to Zork. Please Login.');
+    res.send('ZORK AS A SERVICE. Please log in.');
 });
 
 // get all users function

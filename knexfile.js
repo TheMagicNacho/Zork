@@ -6,7 +6,8 @@ import 'dotenv/config';
  */
  export const development = {
   client: 'postgresql',
-  connection: 'postgres://postgres:docker@localhost:5432/zork_db'
+  // connection: 'postgres://postgres:docker@localhost:5432/zork_db'
+  connection: process.env.CONNECTION_STRING
 };
 
 export const staging = {
